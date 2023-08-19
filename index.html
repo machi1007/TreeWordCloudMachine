@@ -190,6 +190,24 @@
                 link.click();
             });
         }
+
+    function deleteKeyword(index) {
+        if (index >= 0 && index < filteredKeywords.length) {
+            filteredKeywords.splice(index, 1); // 從過濾後的關鍵字列表中刪除該關鍵字
+            updateKeywordList(); // 更新關鍵字列表
+            renderWordCloud(); // 重新生成文字雲
+        }
+    }
+
+    function updateKeywordList() {
+        var keywordListHtml = "<h2>關鍵字列表</h2><ul>";
+        for (var i = 0; i < filteredKeywords.length; i++) {
+            keywordListHtml += "<li>" + filteredKeywords[i].text + " (" + filteredKeywords[i].weight + "次) <button onclick='deleteKeyword(" + i + ")'>x</button></li>";
+        }
+        keywordListHtml += "</ul>";
+
+        document.getElementById("keywordList").innerHTML = keywordListHtml;
+    }
     </script>
 </body>
 </html>
